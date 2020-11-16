@@ -1,4 +1,6 @@
-const express = require('express');
+const express = require('express'),
+    morgan = require("morgan");
+
 const app = express();
 
 let topMovies = [
@@ -43,6 +45,8 @@ let topMovies = [
         director: "Wolfgang Reitherman"
     }
 ];
+
+app.use(morgan("common"));
 
 app.get("/movies", (req, res) => {
     res.json(topMovies);
