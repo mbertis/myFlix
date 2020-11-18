@@ -4,6 +4,12 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>myFlix Documentation</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair:wght@300&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" type="text/css" href="../styles.css" />
   </head>
   <body>
     <header>
@@ -18,6 +24,175 @@
         update their personal information, and create a list of their favorite
         movies.
       </p>
+    </div>
+    <div>
+      <table class="request_table">
+        <thead>
+          <tr>
+            <th>Request</th>
+            <th>URL</th>
+            <th>HTTP Method</th>
+            <th>Request Body Data Format</th>
+            <th>Response Body Data Format</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Get a list of movies</td>
+            <td>/movies</td>
+            <td>GET</td>
+            <td>None</td>
+            <td>A JSON object holding data about all the movies</td>
+          </tr>
+          <tr>
+            <td>Get data about a single movie by title</td>
+            <td>/movies/[Title]</td>
+            <td>GET</td>
+            <td>None</td>
+            <td>
+              A JSON object holding data about a single movie, containing ID,
+              title, description, genre, director, and image URL property.
+              Example:<br />
+              {<br />
+              movieID: 5<br />
+              title: A Quiet Place<br />
+              description: If they hear you, they hunt you. A family must live
+              in silence to avoid mysterious creatures that hunt by sound.
+              Knowing that even the slightest whisper or footstep can bring
+              death, Evelyn and Lee are determined to find a way to protect
+              their children while desperately searching for a way to fight
+              back.<br />
+              genre: {<br />
+              Horror,<br />
+              Sci-Fi<br />
+              }<br />
+              director: John Krasinski<br />
+              image: ../img/quiet_place.jpg<br />
+              }
+            </td>
+          </tr>
+
+          <tr>
+            <td>Get information about a genre by name</td>
+            <td>/movies/[genre]</td>
+            <td>GET</td>
+            <td>None</td>
+            <td>
+              A JSON object holding the data about the genre that was entered.
+              Example:<br />
+              {<br />
+              genre: Horror<br />
+              description: A horror film is one that seeks to elicit fear in its
+              audience for entertainment purposes. Horror films additionally aim
+              to evoke viewers' nightmares, fears, revulsions and terror of the
+              unknown and macabre.<br />
+              }
+            </td>
+          </tr>
+          <tr>
+            <td>Get information about a director by name</td>
+            <td>/movies/[director]</td>
+            <td>GET</td>
+            <td>None</td>
+            <td>
+              A JSON object holding the data about the director that was
+              enetered. Example:<br />
+              {<br />
+              name: Wes Anderson <br />
+              bio: Wesley Wales Anderson is an American film director,
+              screenwriter, and producer. His films are known for their
+              symmetry, eccentricity and distinctive visual and narrative
+              styles, and he is regarded by some critics as a modern-day example
+              of the auteur.<br />
+              birthYear: 1969<br />
+              deathYear: n/a<br />
+              }
+            </td>
+          </tr>
+          <tr>
+            <td>Allow new users to register</td>
+            <td>/users</td>
+            <td>POST</td>
+            <td>
+              A JSON object holding account information for the user.
+              Example:<br />
+              {<br />
+              username: JohnSmith<br />
+              password: 123456<br />
+              email: JohnSmith@gmail.com<br />
+              }
+            </td>
+            <td>
+              A JSON object holding the account information for the user, along
+              with a User ID. Example:<br />
+              {<br />
+              userID: 77<br />
+              username: JohnSmith<br />
+              password: 123456<br />
+              email: JohnSmith@gmail.com<br />
+              }
+            </td>
+          </tr>
+          <tr>
+            <td>Allow users to update username</td>
+            <td>/users/[email]/[Username]</td>
+            <td>PUT</td>
+            <td>None</td>
+            <td>
+              A text message indicating that the username has been updated
+            </td>
+          </tr>
+          <tr>
+            <td>Add a movie to list of favorites</td>
+            <td>/movies</td>
+            <td>POST</td>
+            <td>
+              A JSON object holding data about the movie to add, structured
+              like: <br />
+              {<br />
+              title: Isle of Dogs<br />
+              description: When, by executive decree, all the canine pets of
+              Megasaki City are exiled to a vast garbage-dump called Trash
+              Island, 12-year-old Atari sets off alone in a miniature
+              Junior-Turbo Prop and flies across the river in search of his
+              bodyguard-dog, Spots. There, with the assistance of a pack of
+              newly-found mongrel friends, he begins an epic journey that will
+              decide the fate and future of the entire Prefecture.<br />
+              genre: {<br />
+              Animation,<br />
+              Comedy<br />
+              }<br />
+              director: Wes Anderson<br />
+              image: ../img/dogs.jpg<br />
+              }
+            </td>
+            <td>
+              A text message indicating that the movie has been added to the
+              user's list of favorites.
+            </td>
+          </tr>
+          <tr>
+            <td>Remove a movie from list of favorites by title</td>
+            <td>/movies/[Title]</td>
+            <td>DELETE</td>
+            <td>None</td>
+            <td>
+              A text message indicating whether the movie was successfully
+              removed from the list of favorites
+            </td>
+          </tr>
+          <tr>
+            <td>Allow users to deregister</td>
+            <td>/users/[email]</td>
+            <td>DELETE</td>
+            <td>None</td>
+            <td>
+              A text message indicating whether the user has been successfully
+              deregistered
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </body>
 </html>

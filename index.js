@@ -21,7 +21,7 @@ let topMovies = [
     director: "Jordan Peele",
   },
   {
-    title: "A Quet Place",
+    title: "A Quiet Place",
     director: "John Krasinski",
   },
   {
