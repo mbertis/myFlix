@@ -59,42 +59,42 @@ app.get("/movies", (req, res) => {
 
 // Gets the data about a single movie, by title
 app.get("/movies/:title", (req, res) => {
-  res.send("Successful GET request returning data on entered movie");
+  res.send("Successful GET request returning data on " + req.params.title);
 });
 
 //Gets information about a genre by name
 app.get("/movies/:genre", (req, res) => {
-  res.send("Successful GET request returning data on entered genre");
+  res.send("Successful GET request returning data on " + req.params.genre);
 });
 
 //Gets information about a director by name
 app.get("/movies/:director", (req, res) => {
-  res.send("Successful GET request returning data on entered director");
+  res.send("Successful GET request returning data on " + req.params.director);
 });
 
 //Allows new users to register
 app.post("/users", (req, res) => {
-  res.send("New user created successfully");
+  res.send("Successful POST request creating user");
 });
 
 //Allows user to update username
 app.put("/users/:email/:username", (req, res) => {
-  res.send("Username updated successfully");
+  res.send("Successful PUT request updating username with email: " + req.params.email + " to username: " + req.params.username);
 });
 
 //Add a movie to list of favorites
 app.post("/movies", (req, res) => {
-  res.send("Movie added to list of favorites");
+  res.send("Successful POST request adding move to list of favorites");
 });
 
 //Remove a movie from list of favorites
 app.delete("/movies/:title", (req, res) => {
-  res.send("Movie was removed from favorites list");
+  res.send("Successful DELETE request removing " + req.params.title + " from list of favorites");
 });
 
 //Allow users to deregister
 app.delete("/users/:email", (req, res) => {
-  res.send("User has successfully deregistered");
+  res.send("Successful DELETE request deregistering user with email: " + req.params.email);
 });
 
 app.get("/", (req, res) => {
