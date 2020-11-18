@@ -1,7 +1,7 @@
 const express = require("express"),
   morgan = require("morgan"),
   bodyParser = require("body-parser"),
-  uuid = require('uuid');
+  uuid = require("uuid");
 
 const app = express();
 
@@ -79,7 +79,12 @@ app.post("/users", (req, res) => {
 
 //Allows user to update username
 app.put("/users/:email/:username", (req, res) => {
-  res.send("Successful PUT request updating username with email: " + req.params.email + " to username: " + req.params.username);
+  res.send(
+    "Successful PUT request updating username with email: " +
+      req.params.email +
+      " to username: " +
+      req.params.username
+  );
 });
 
 //Add a movie to list of favorites
@@ -89,12 +94,19 @@ app.post("/movies", (req, res) => {
 
 //Remove a movie from list of favorites
 app.delete("/movies/:title", (req, res) => {
-  res.send("Successful DELETE request removing " + req.params.title + " from list of favorites");
+  res.send(
+    "Successful DELETE request removing " +
+      req.params.title +
+      " from list of favorites"
+  );
 });
 
 //Allow users to deregister
 app.delete("/users/:email", (req, res) => {
-  res.send("Successful DELETE request deregistering user with email: " + req.params.email);
+  res.send(
+    "Successful DELETE request deregistering user with email: " +
+      req.params.email
+  );
 });
 
 app.get("/", (req, res) => {
