@@ -87,18 +87,9 @@ app.put("/users/:email/:username", (req, res) => {
   );
 });
 
-//Add a movie to list of favorites
-app.post("/movies", (req, res) => {
-  res.send("Successful POST request adding move to list of favorites");
-});
-
-//Remove a movie from list of favorites
-app.delete("/movies/:title", (req, res) => {
-  res.send(
-    "Successful DELETE request removing " +
-      req.params.title +
-      " from list of favorites"
-  );
+//Add a movie to list of favorites or remove a move from list of favorites
+app.put("/users/:username/movies/:title", (req, res) => {
+  res.send("Successful PUT request updating list of favorite movies");
 });
 
 //Allow users to deregister

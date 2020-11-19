@@ -144,12 +144,12 @@
             </td>
           </tr>
           <tr>
-            <td>Add a movie to list of favorites</td>
-            <td>/movies</td>
-            <td>POST</td>
+            <td>Allow users to update list of favorite movies</td>
+            <td>/users/[Username]/movies/[Title]</td>
+            <td>PUT</td>
             <td>
-              A JSON object holding data about the movie to add, structured
-              like: <br />
+              A JSON object holding data about the movie to add or remove,
+              structured like: <br />
               {<br />
               title: Isle of Dogs<br />
               description: When, by executive decree, all the canine pets of
@@ -169,18 +169,8 @@
               }
             </td>
             <td>
-              A text message indicating that the movie has been added to the
-              user's list of favorites.
-            </td>
-          </tr>
-          <tr>
-            <td>Remove a movie from list of favorites by title</td>
-            <td>/movies/[Title]</td>
-            <td>DELETE</td>
-            <td>None</td>
-            <td>
-              A text message indicating whether the movie was successfully
-              removed from the list of favorites
+              A text message indicating that the movie has been added to or
+              removed from the user's list of favorites.
             </td>
           </tr>
           <tr>
