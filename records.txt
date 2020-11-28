@@ -17,41 +17,195 @@ var movie1 = {
 
 db.movies.insertOne(movie1)
 
-db.movies.update(
-  { _id: ObjectId("5fc2c1de7b5ae27279f180af") },
-  { $set: { Description: "Update A young FBI cadet must receive the help of an incarcerated and manipulative cannibal killer." } }
-)
-
 var user1 = {
     Username: "madison",
     Email: "madison@gmail.com",
     Password: "123",
-    Birthday: "08-23-1995",
+    Birthday: new Date("1995-08-23"),
     FavoriteMovies: []
 }
 
 db.users.insertOne(user1)
 
-db.users.update(
-  { Username: "madison" },
-  { $push: { FavoriteMovies: ObjectId("5fc2c1de7b5ae27279f180af") } }
-)
-
-db.users.update(
-  { Username: "madison" },
-  { $pull: { FavoriteMovies: ObjectId("5fc2c1de7b5ae27279f180af") } }
-)
-
 var user2 = {
     Username: "patrick",
     Email: "patrick@gmail.com",
-    Password: "123",
-    Birthday: "08-23-1995",
+    Password: "1234",
+    Birthday: new Date("1962-04-09"),
     FavoriteMovies: []
 }
 
 db.users.insertOne(user2)
 
-db.users.findOne({Username: "patrick"})
+**New Info to Add in Mongo**
 
-db.movies.remove({ "Genre.Name": "Thriller" })
+var movie2 = {
+  Title: "The Grand Budapest Hotel",
+  Description: "A writer encounters the owner of an aging high-class hotel, who tells him of his early years serving as a lobby boy in the hotel's glorious years under an exceptional concierge.",
+  Genre: {
+    Name: "Comedy",
+    Description: "A comedy film is a category of film in which the main emphasis is on humor. These films are designed to make the audience laugh through amusement and most often work by exaggerating characteristics for humorous effect. Films in this style traditionally have a happy ending."
+  },
+  Director: {
+    Name: "Wes Anderson",
+    Bio: "Wesley Wales Anderson is an American film director, screenwriter, and producer. His films are known for their symmetry, eccentricity and distinctive visual and narrative styles, and he is regarded by some critics as a modern-day example of the auteur.",
+    Birth: "1969",
+    Death: ""
+  },
+  ImagePath: "https://m.media-amazon.com/images/M/MV5BMzM5NjUxOTEyMl5BMl5BanBnXkFtZTgwNjEyMDM0MDE@._V1_UX182_CR0,0,182,268_AL_.jpg",
+  Featured: true
+}
+
+db.movies.insertOne(movie2)
+
+var movie3 = {
+    Title: "Us",
+    Description: "A family's serene beach vacation turns to chaos when their doppelgängers appear and begin to terrorize them.",
+    Genre: {
+        Name: "Thriller",
+        Description: "Thriller film, also known as suspense film or suspense thriller, is a broad film genre that involves excitement and suspense in the audience."
+    },
+    Director: {
+        Name: "Jordan Peele",
+        Bio: "Jordan Haworth Peele is an American actor, voice actor, comedian, writer, director, and producer. He is best known for his television and film work in the comedy and horror genres.",
+        Birth: "1979",
+        Death: ""
+    },
+    ImagePath: "https://m.media-amazon.com/images/M/MV5BZTliNWJhM2YtNDc1MC00YTk1LWE2MGYtZmE4M2Y5ODdlNzQzXkEyXkFqcGdeQXVyMzY0MTE3NzU@._V1_UX182_CR0,0,182,268_AL_.jpg",
+    Featured: true
+}
+
+db.movies.insertOne(movie3)
+
+var movie4 = {
+    Title: "Isle of Dogs",
+    Description: "Set in Japan, Isle of Dogs follows a boy's odyssey in search of his lost dog.",
+    Genre: {
+        Name: "Animation",
+        Description: "Animation is a method in which figures are manipulated to appear as moving images. In traditional animation, images are drawn or painted by hand on transparent celluloid sheets to be photographed and exhibited on film. Today, most animations are made with computer-generated imagery.",
+    },
+    Director: {
+        Name: "Wes Anderson",
+        Bio: "Wesley Wales Anderson is an American film director, screenwriter, and producer. His films are known for their symmetry, eccentricity and distinctive visual and narrative styles, and he is regarded by some critics as a modern-day example of the auteur.",
+        Birth: "1969",
+        Death: ""
+    },
+    ImagePath: "https://m.media-amazon.com/images/M/MV5BMTYyOTUwNjAxM15BMl5BanBnXkFtZTgwODcyMzE0NDM@._V1_UX182_CR0,0,182,268_AL_.jpg",
+    Featured: false
+}
+
+db.movies.insertOne(movie4)
+
+var movie5 = {
+    Title: "A Quiet Place",
+    Description: "In a post-apocalyptic world, a family is forced to live in silence while hiding from monsters with ultra-sensitive hearing.",
+    Genre: {
+        Name: "Sci-Fi",
+        Description: "Science fiction is a genre of speculative fiction that typically deals with imaginative and futuristic concepts such as advanced science and technology, space exploration, time travel, parallel universes, and extraterrestrial life.",
+    },
+    Director: {
+        Name: "John Krasinski",
+        Bio: "John Burke Krasinski is an American actor and filmmaker. He is the recipient of a number of accolades, including four Primetime Emmy Award nominations and two Screen Actors Guild Awards.",
+        Birth: "1979",
+        Death: ""
+    },
+    ImagePath: "https://m.media-amazon.com/images/M/MV5BMjI0MDMzNTQ0M15BMl5BanBnXkFtZTgwMTM5NzM3NDM@._V1_UX182_CR0,0,182,268_AL_.jpg",
+    Featured: false
+}
+
+db.movies.insertOne(movies5)
+
+var movie6 = {
+    Title: "Inception",
+    Description: "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O.",
+    Genre: {
+        Name: "Sci-Fi",
+        Description: "Science fiction is a genre of speculative fiction that typically deals with imaginative and futuristic concepts such as advanced science and technology, space exploration, time travel, parallel universes, and extraterrestrial life.",
+    },
+    Director: {
+        Name: "Christopher Nolan",
+        Bio: "Christopher Edward Nolan CBE is a British-American film director, producer and screenwriter known for making personal, distinctive films within the Hollywood mainstream.",
+        Birth: "1970",
+        Death: ""
+    },
+    ImagePath: "https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_UX182_CR0,0,182,268_AL_.jpg",
+    Featured: false
+}
+
+db.movies.insertOne(movie6)
+
+var movie7 = {
+    Title: "Toy Story",
+    Description: "A cowboy doll is profoundly threatened and jealous when a new spaceman figure supplants him as top toy in a boy's room.",
+    Genre: {
+        Name: "Animation",
+        Description: "Animation is a method in which figures are manipulated to appear as moving images. In traditional animation, images are drawn or painted by hand on transparent celluloid sheets to be photographed and exhibited on film. Today, most animations are made with computer-generated imagery.",
+    },
+    Director: {
+        Name: "John Lasseter",
+        Bio: "John Alan Lasseter is an American animator, film director, screenwriter, producer, voice actor and former chief creative officer of Walt Disney Animation Studios, Pixar and Disneytoon Studios. He was also the Principal Creative Advisor for Walt Disney Imagineering.",
+        Birth: "1957",
+        Death: ""
+    },
+    ImagePath: "https://m.media-amazon.com/images/M/MV5BMDU2ZWJlMjktMTRhMy00ZTA5LWEzNDgtYmNmZTEwZTViZWJkXkEyXkFqcGdeQXVyNDQ2OTk4MzI@._V1_UX182_CR0,0,182,268_AL_.jpg",
+    Featured: false
+}
+
+db.movies.insertOne(movie7)
+
+var movie8 = {
+    Title: "Jurassic Park",
+    Description: "A pragmatic paleontologist visiting an almost complete theme park is tasked with protecting a couple of kids after a power failure causes the park's cloned dinosaurs to run loose.",
+    Genre: {
+        Name: "Sci-Fi",
+        Description: "Science fiction is a genre of speculative fiction that typically deals with imaginative and futuristic concepts such as advanced science and technology, space exploration, time travel, parallel universes, and extraterrestrial life."
+    },
+    Director: {
+        Name: "Steven Spielberg",
+        Bio: "Steven Allan Spielberg is an American film director, producer, and screenwriter. He is considered one of the founding pioneers of the New Hollywood era and one of the most popular directors and producers in film history. Spielberg started in Hollywood directing television and several minor theatrical releases.",
+        Birth: "1946",
+        Death: ""
+    },
+    ImagePath: "https://m.media-amazon.com/images/M/MV5BMjM2MDgxMDg0Nl5BMl5BanBnXkFtZTgwNTM2OTM5NDE@._V1_UX182_CR0,0,182,268_AL_.jpg",
+    Featured: false
+}
+
+db.movies.insertOne(movie8)
+
+var movie9 = {
+    Title: "The Aristocats",
+    Description: "With the help of a smooth talking tomcat, a family of Parisian felines set to inherit a fortune from their owner try to make it back home after a jealous butler kidnaps them and leaves them in the country.",
+    Genre: {
+        Name: "Comedy",
+        Description: "A comedy film is a category of film in which the main emphasis is on humor. These films are designed to make the audience laugh through amusement and most often work by exaggerating characteristics for humorous effect. Films in this style traditionally have a happy ending."
+    },
+    Director: {
+        Name: "Wolfgang Reitherman",
+        Bio: "Wolfgang Reitherman, also known and sometimes credited as Woolie Reitherman, was a German-American animator, director, and producer who was one of the Nine Old Men of core animators at Walt Disney Animation Studios.",
+        Birth: "1909",
+        Death: "1985"
+    },
+    ImagePath: "https://m.media-amazon.com/images/M/MV5BMTU1MzM0MjcxMF5BMl5BanBnXkFtZTgwODQ0MzcxMTE@._V1_UX182_CR0,0,182,268_AL_.jpg",
+    Featured: false
+}
+
+db.movies.insertOne(movie9)
+
+var movie10 = {
+    Title: "Blade Runner 2049",
+    Description: "Young Blade Runner K's discovery of a long-buried secret leads him to track down former Blade Runner Rick Deckard, who's been missing for thirty years.",
+    Genre: {
+        Name: "Sci-Fi",
+        Description: "Science fiction is a genre of speculative fiction that typically deals with imaginative and futuristic concepts such as advanced science and technology, space exploration, time travel, parallel universes, and extraterrestrial life."
+    },
+    Director: {
+        Name: "Denis Villeneuve",
+        Bio: "Denis Villeneuve OC CQ is a French Canadian film director, producer, and screenwriter. He is a four-time recipient of the Canadian Screen Award for Best Direction, for Maelström in 2001, Polytechnique in 2009, Incendies in 2011 and Enemy in 2013.",
+        Birth: "1967",
+        Death: ""
+    },
+    ImagePath: "https://m.media-amazon.com/images/M/MV5BNzA1Njg4NzYxOV5BMl5BanBnXkFtZTgwODk5NjU3MzI@._V1_UX182_CR0,0,182,268_AL_.jpg",
+    Featured: true
+}
+
+db.movies.insertOne(movie10)
