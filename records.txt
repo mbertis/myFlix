@@ -37,8 +37,6 @@ var user2 = {
 
 db.users.insertOne(user2)
 
-**New Info to Add in Mongo**
-
 var movie2 = {
   Title: "The Grand Budapest Hotel",
   Description: "A writer encounters the owner of an aging high-class hotel, who tells him of his early years serving as a lobby boy in the hotel's glorious years under an exceptional concierge.",
@@ -113,7 +111,7 @@ var movie5 = {
     Featured: false
 }
 
-db.movies.insertOne(movies5)
+db.movies.insertOne(movie5)
 
 var movie6 = {
     Title: "Inception",
@@ -209,3 +207,35 @@ var movie10 = {
 }
 
 db.movies.insertOne(movie10)
+
+**New info to add to Mongo**
+
+var user3 = {
+    Username: "JohnsonGus",
+    Email: "gusjohnson@hotmail.com",
+    Password: "123Pass",
+    Birthday: new Date("1995-06-20"),
+    FavoriteMovies: []
+}
+
+db.users.insertOne(user3)
+
+var user4 = {
+    Username: "jessiepaege",
+    Email: "jessie@gmail.com",
+    Password: "fendercatmom555",
+    Birthday: new Date("1999-03-12"),
+    FavoriteMovies: []
+}
+
+db.users.insertOne(user4)
+
+var user5 = {
+    Username: "oohgaryc",
+    Email: "garysbestemail@gmail.com",
+    Password: "pincollector007",
+    Birthday: new Date("1980-11-18"),
+    FavoriteMovies: []
+}
+
+db.users.insertOne(user5)
