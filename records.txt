@@ -1,0 +1,57 @@
+var movie1 = {
+  Title: "Silence of the Lambs",
+  Description: "A young FBI cadet must receive the help of an incarcerated and manipulative cannibal killer to help catch another serial killer.",
+  Genre: {
+    Name: "Thriller",
+    Description: "Thriller film, also known as suspense film or suspense thriller, is a broad film genre that involves excitement and suspense in the audience."
+  },
+  Director: {
+    Name: "Jonathan Demme",
+    Bio: "Robert Jonathan Demme was an American director, producer, and screenwriter.",
+    Birth: "1944",
+    Death: "2017"
+  },
+  ImagePath: "https://m.media-amazon.com/images/M/MV5BNjNhZTk0ZmEtNjJhMi00YzFlLWE1MmEtYzM1M2ZmMGMwMTU4XkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_UX182_CR0,0,182,268_AL_.jpg",
+  Featured: true
+}
+
+db.movies.insertOne(movie1)
+
+db.movies.update(
+  { _id: ObjectId("5fc2c1de7b5ae27279f180af") },
+  { $set: { Description: "Update A young FBI cadet must receive the help of an incarcerated and manipulative cannibal killer." } }
+)
+
+var user1 = {
+    Username: "madison",
+    Email: "madison@gmail.com",
+    Password: "123",
+    Birthday: "08-23-1995",
+    FavoriteMovies: []
+}
+
+db.users.insertOne(user1)
+
+db.users.update(
+  { Username: "madison" },
+  { $push: { FavoriteMovies: ObjectId("5fc2c1de7b5ae27279f180af") } }
+)
+
+db.users.update(
+  { Username: "madison" },
+  { $pull: { FavoriteMovies: ObjectId("5fc2c1de7b5ae27279f180af") } }
+)
+
+var user2 = {
+    Username: "patrick",
+    Email: "patrick@gmail.com",
+    Password: "123",
+    Birthday: "08-23-1995",
+    FavoriteMovies: []
+}
+
+db.users.insertOne(user2)
+
+db.users.findOne({Username: "patrick"})
+
+db.movies.remove({ "Genre.Name": "Thriller" })
