@@ -145,7 +145,7 @@ app.get("/users/:Username", (req, res) => {
   Email: String (required),
   Birthday: Date
 }*/
-app.put("/users/:username", (req, res) => {
+app.put("/users/:Username", (req, res) => {
   Users.findOneAndUpdate({Username: req.params.Username}, {$set: 
   {
     Username: req.body.Username,
@@ -165,10 +165,22 @@ app.put("/users/:username", (req, res) => {
   });
 });
 
-//Add a movie to list of favorites or remove a move from list of favorites
-app.put("/users/:username/movies/:title", (req, res) => {
-  res.send("Successful PUT request updating list of favorite movies");
+//Add a movie to list of favorites
+app.post("/users/:Username/Movies/:MovieID", (req, res) => {
+  Users.findOneAndUpdate({Username: req.params.Username}, {
+    $push: { FavoriteMovies: req.params.MovieID }
+  },
+  {new: true}, //This line makes sure that the updated document is returned
+  (err, updatedUser) => {
+    if (err) {
+      console.error(err);
+      res.status(500).send("Error: " + err);
+    } else {
+      res.json(updatedUser);
+    }
+  });
 });
+
 
 //Allow users to deregister
 app.delete("/users/:email", (req, res) => {
