@@ -137,14 +137,32 @@ app.get("/users/:Username", (req, res) => {
   });
 });
 
-//Allows user to update username
-app.put("/users/:email/:username", (req, res) => {
-  res.send(
-    "Successful PUT request updating username with email: " +
-      req.params.email +
-      " to username: " +
-      req.params.username
-  );
+//Allows user to update their info by username
+/* Expect JSON in this format
+{
+  Username: String (required),
+  Password: String (required),
+  Email: String (required),
+  Birthday: Date
+}*/
+app.put("/users/:username", (req, res) => {
+  Users.findOneAndUpdate({Username: req.params.Username}, {$set: 
+  {
+    Username: req.body.Username,
+    Password: req.body.Password,
+    Email: req.body.Email,
+    Birthday: req.body.Birthday
+  }
+  },
+  {new: true}, //This makes sure the updated document is returned
+  (err, updatedUser) => {
+    if(err) {
+      console.error(err);
+      res.status(500).send("Error: " + err);
+    } else {
+      res.json(updatedUser);
+    }
+  });
 });
 
 //Add a movie to list of favorites or remove a move from list of favorites
