@@ -73,6 +73,18 @@ app.get("/movies", (req, res) => {
   });
 });
 
+//Gets the list of all genres
+app.get("/genres", (req, res) => {
+  Genres.find()
+  .then((genres) => {
+    res.status(201).json(genres);
+  })
+  .catch((err) => {
+    console.error(err);
+    res.status(500).send("Error: " + err);
+  });
+});
+
 // Gets the data about a single movie, by title
 app.get("/movies/:Title", (req, res) => {
   Movies.findOne({Title: req.params.Title})

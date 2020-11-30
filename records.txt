@@ -287,7 +287,6 @@ var genre4 = {
 
 db.genres.insertOne(genre4)
 
-**New Info
 
 var director1 = {
     Name: "Hayao Miyazaki",
