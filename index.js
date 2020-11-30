@@ -182,7 +182,7 @@ app.post("/users/:Username/Movies/:MovieID", (req, res) => {
 });
 
 //Remove a movie from list of favorites
-app.post("/users/:Username/Movies/:MovieID", (req, res) => {
+app.delete("/users/:Username/Movies/:MovieID", (req, res) => {
   Users.findOneAndUpdate({Username: req.params.Username}, {
     $pull: { FavoriteMovies: req.params.MovieID }
   },
@@ -200,7 +200,7 @@ app.post("/users/:Username/Movies/:MovieID", (req, res) => {
 
 //Allow users to deregister, by username
 app.delete("/users/:Username", (req, res) => {
-  Users.fineOneAndRemove({Username: req.params.Username})
+  Users.findOneAndRemove({Username: req.params.Username})
   .then((user) => {
     if (!user) {
       res.status(400).send(req.params.Username + " was not found");
