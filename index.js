@@ -113,6 +113,18 @@ app.post("/users", (req, res) => {
   });
 });
 
+//Get information about ALL users
+app.get("/users", (req, res) => {
+  Users.find()
+  .then((users) => {
+    res.status(201).json(users);
+  })
+  .catch((err) => {
+    console.error(err);
+    res.status(500).send("Error: " + err);
+  });
+});
+
 //Allows user to update username
 app.put("/users/:email/:username", (req, res) => {
   res.send(
