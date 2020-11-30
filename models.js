@@ -25,7 +25,9 @@ let userSchema = mongoose.Schema({
 
 let directorSchema = mongoose.Schema({
     Name: {type: String, required: true},
-    Bio: {type: String, required: true}
+    Bio: {type: String, required: true},
+    Birth: {type: String},
+    Death: {type: String}
 });
 
 let genreSchema = mongoose.Schema({

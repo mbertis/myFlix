@@ -257,3 +257,115 @@ db.movies.update(
 db.users.remove({Username: "patrick"})
 
 db.movies.remove({Title: "Silence of the Lambs"})
+
+
+var genre1 = {
+    Name: "Animation",
+    Description: "Animation is a method in which figures are manipulated to appear as moving images. In traditional animation, images are drawn or painted by hand on transparent celluloid sheets to be photographed and exhibited on film. Today, most animations are made with computer-generated imagery.",
+  }
+
+db.genres.insertOne(genre1)
+
+var genre2 = {
+    Name: "Comedy",
+    Description: "A comedy film is a category of film in which the main emphasis is on humor. These films are designed to make the audience laugh through amusement and most often work by exaggerating characteristics for humorous effect. Films in this style traditionally have a happy ending."
+}
+
+db.genres.insertOne(genre2)
+
+var genre3 = {
+    Name: "Thriller",
+        Description: "Thriller film, also known as suspense film or suspense thriller, is a broad film genre that involves excitement and suspense in the audience."
+}
+
+db.genres.insertOne(genre3)
+
+var genre4 = {
+    Name: "Sci-Fi",
+    Description: "Science fiction is a genre of speculative fiction that typically deals with imaginative and futuristic concepts such as advanced science and technology, space exploration, time travel, parallel universes, and extraterrestrial life.",
+}
+
+db.genres.insertOne(genre4)
+
+**New Info
+
+var director1 = {
+    Name: "Hayao Miyazaki",
+    Bio: "Hayao Miyazaki is one of Japan's greatest animation directors. The entertaining plots, compelling characters, and breathtaking animation in his films have earned him international renown from critics as well as public recognition within Japan.",
+    Birth: "1941",
+    Death: ""
+}
+
+db.directors.insertOne(director1)
+
+var director2 = {
+    Name: "Wes Anderson",
+    Bio: "Wesley Wales Anderson is an American film director, screenwriter, and producer. His films are known for their symmetry, eccentricity and distinctive visual and narrative styles, and he is regarded by some critics as a modern-day example of the auteur.",
+    Birth: "1969",
+    Death: ""
+}
+
+db.directors.insertOne(director2)
+
+var director3 = {
+    Name: "Jordan Peele",
+    Bio: "Jordan Haworth Peele is an American actor, voice actor, comedian, writer, director, and producer. He is best known for his television and film work in the comedy and horror genres.",
+    Birth: "1979",
+    Death: ""
+}
+
+db.directors.insertOne(director3)
+
+var director4 = {
+    Name: "John Krasinski",
+    Bio: "John Burke Krasinski is an American actor and filmmaker. He is the recipient of a number of accolades, including four Primetime Emmy Award nominations and two Screen Actors Guild Awards.",
+    Birth: "1979",
+    Death: ""
+}
+
+db.directors.insertOne(director4)
+
+var director5 = {
+    Name: "Christopher Nolan",
+    Bio: "Christopher Edward Nolan CBE is a British-American film director, producer and screenwriter known for making personal, distinctive films within the Hollywood mainstream.",
+    Birth: "1970",
+    Death: ""
+}
+
+db.directors.insertOne(director5)
+
+var director6 = {
+    Name: "John Lasseter",
+    Bio: "John Alan Lasseter is an American animator, film director, screenwriter, producer, voice actor and former chief creative officer of Walt Disney Animation Studios, Pixar and Disneytoon Studios. He was also the Principal Creative Advisor for Walt Disney Imagineering.",
+    Birth: "1957",
+    Death: ""
+}
+
+db.directors.insertOne(director6)
+
+var director7 = {
+    Name: "Steven Spielberg",
+    Bio: "Steven Allan Spielberg is an American film director, producer, and screenwriter. He is considered one of the founding pioneers of the New Hollywood era and one of the most popular directors and producers in film history. Spielberg started in Hollywood directing television and several minor theatrical releases.",
+    Birth: "1946",
+    Death: ""
+}
+
+db.directors.insertOne(director7)
+
+var director8 = {
+     Name: "Wolfgang Reitherman",
+    Bio: "Wolfgang Reitherman, also known and sometimes credited as Woolie Reitherman, was a German-American animator, director, and producer who was one of the Nine Old Men of core animators at Walt Disney Animation Studios.",
+    Birth: "1909",
+    Death: "1985"
+}
+
+db.directors.insertOne(director8)
+
+var director9 = {
+    Name: "Denis Villeneuve",
+    Bio: "Denis Villeneuve OC CQ is a French Canadian film director, producer, and screenwriter. He is a four-time recipient of the Canadian Screen Award for Best Direction, for Maelström in 2001, Polytechnique in 2009, Incendies in 2011 and Enemy in 2013.",
+    Birth: "1967",
+    Death: ""
+}
+
+db.directors.insertOne(director9)
