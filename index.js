@@ -60,7 +60,7 @@ app.use(morgan("common"));
 
 // Gets the list of data about all movies
 app.get("/movies", (req, res) => {
-  Users.find()
+  Movies.find()
   .then((movies) => {
     res.status(201).json(movies);
   })
@@ -71,10 +71,10 @@ app.get("/movies", (req, res) => {
 });
 
 // Gets the data about a single movie, by title
-app.get("/movies/:title", (req, res) => {
+app.get("/movies/:Title", (req, res) => {
   Movies.findOne({Title: req.params.Title})
   .then((movie) => {
-    res.json(movie);
+    res.status(201).json(movie);
   })
   .catch((err) => {
     console.error(err);
@@ -83,10 +83,10 @@ app.get("/movies/:title", (req, res) => {
 });
 
 //Gets information about a genre by name
-app.get("/movies/:genre", (req, res) => {
-  Movies.find()
-  .ten((movies) => {
-    res.status(201).json(movies);
+app.get("/movies/:Genre", (req, res) => {
+  Movies.findOne({Genre: req.params.Genre})
+  .then((genre) => {
+    res.status(201).json(genre);
   })
   .catch((err) => {
     console.error(err);
@@ -95,7 +95,7 @@ app.get("/movies/:genre", (req, res) => {
 });
 
 //Gets information about a director by name
-app.get("/movies/:director", (req, res) => {
+app.get("/movies/:Director", (req, res) => {
   Movies.findOne({Director: req.params.Director})
   .then((director) => {
     res.json(director);
