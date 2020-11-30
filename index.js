@@ -1,9 +1,15 @@
 const express = require("express"),
   morgan = require("morgan"),
   bodyParser = require("body-parser"),
-  uuid = require("uuid");
+  uuid = require("uuid"),
+  mongoose = require("mongoose"),
+  Models = require("./models.js");
 
-const app = express();
+const app = express(),
+  Movies = Models.Movie,
+  Users = Models.User;
+
+mongoose.connect("mongodb://localhost:27017/myFlixDB", { useNewUrlParser: true, useUnifiedTopology: true });
 
 app.use(bodyParser.json());
 
