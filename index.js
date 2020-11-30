@@ -7,7 +7,10 @@ const express = require("express"),
 
 const app = express(),
   Movies = Models.Movie,
-  Users = Models.User;
+  Users = Models.User,
+  Directors = Models.Director,
+  Genres = Models.Genre;
+
 
 mongoose.connect("mongodb://localhost:27017/myFlixDB", { useNewUrlParser: true, useUnifiedTopology: true });
 
@@ -83,8 +86,8 @@ app.get("/movies/:Title", (req, res) => {
 });
 
 //Gets information about a genre by name
-app.get("/movies/:Genre", (req, res) => {
-  Movies.findOne({Genre: req.params.Genre})
+app.get("/genre/:Name", (req, res) => {
+  Genres.findOne({Name: req.params.Name})
   .then((genre) => {
     res.status(201).json(genre);
   })
@@ -95,8 +98,8 @@ app.get("/movies/:Genre", (req, res) => {
 });
 
 //Gets information about a director by name
-app.get("/movies/:Director", (req, res) => {
-  Movies.findOne({Director: req.params.Director})
+app.get("/director/:Name", (req, res) => {
+  Directors.findOne({Name: req.params.Name})
   .then((director) => {
     res.json(director);
   })
