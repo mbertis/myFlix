@@ -198,14 +198,20 @@ app.post("/users/:Username/Movies/:MovieID", (req, res) => {
 });
 
 
-
-
-//Allow users to deregister
-app.delete("/users/:email", (req, res) => {
-  res.send(
-    "Successful DELETE request deregistering user with email: " +
-      req.params.email
-  );
+//Allow users to deregister, by username
+app.delete("/users/:Username", (req, res) => {
+  Users.fineOneAndRemove({Username: req.params.Username})
+  .then((user) => {
+    if (!user) {
+      res.status(400).send(req.params.Username + " was not found");
+    } else {
+      res.status(200).send(req.params.Username + " was successfully deleted");
+    }
+  })
+  .catch((err) => {
+    console.error(err);
+    res.status(500).send("Error: " + err);
+  });
 });
 
 app.get("/", (req, res) => {
