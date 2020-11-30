@@ -282,7 +282,7 @@ db.genres.insertOne(genre3)
 
 var genre4 = {
     Name: "Sci-Fi",
-    Description: "Science fiction is a genre of speculative fiction that typically deals with imaginative and futuristic concepts such as advanced science and technology, space exploration, time travel, parallel universes, and extraterrestrial life.",
+    Description: "Science fiction is a genre of speculative fiction that typically deals with imaginative and futuristic concepts such as advanced science and technology, space exploration, time travel, parallel universes, and extraterrestrial life."
 }
 
 db.genres.insertOne(genre4)
@@ -290,7 +290,7 @@ db.genres.insertOne(genre4)
 
 var director1 = {
     Name: "Hayao Miyazaki",
-    Bio: "Hayao Miyazaki is one of Japan's greatest animation directors. The entertaining plots, compelling characters, and breathtaking animation in his films have earned him international renown from critics as well as public recognition within Japan.",
+    Bio: "Hayao Miyazaki is one of Japan's greatest animation directors. The entertaining plots, compelling characters, and breathtaking animation in his films have earned him international renown from critics as well as public recognition within Japan."
     Birth: "1941",
     Death: ""
 }
@@ -299,7 +299,7 @@ db.directors.insertOne(director1)
 
 var director2 = {
     Name: "Wes Anderson",
-    Bio: "Wesley Wales Anderson is an American film director, screenwriter, and producer. His films are known for their symmetry, eccentricity and distinctive visual and narrative styles, and he is regarded by some critics as a modern-day example of the auteur.",
+    Bio: "Wesley Wales Anderson is an American film director, screenwriter, and producer. His films are known for their symmetry, eccentricity and distinctive visual and narrative styles, and he is regarded by some critics as a modern-day example of the auteur."
     Birth: "1969",
     Death: ""
 }

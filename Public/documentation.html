@@ -54,60 +54,66 @@
               title, description, genre, director, image URL, and whether it is
               featured. Example:<br />
               {<br />
-              movieID: 5<br />
-              title: A Quiet Place<br />
-              description: If they hear you, they hunt you. A family must live
-              in silence to avoid mysterious creatures that hunt by sound.
-              Knowing that even the slightest whisper or footstep can bring
-              death, Evelyn and Lee are determined to find a way to protect
-              their children while desperately searching for a way to fight
-              back.<br />
-              genre: {<br />
-              Horror,<br />
-              Sci-Fi<br />
-              }<br />
-              director: John Krasinski<br />
-              image: ../img/quiet_place.jpg<br />
-              featured: true<br />
-              }
+              movieID: "5fc2d9bdd1685fe25acf861b"<br />
+              Title: "A Quiet Place",<br />
+              Description: "In a post-apocalyptic world, a family is forced to
+              live in silence while hiding from monsters with ultra-sensitive
+              hearing.",<br />
+              Genre: {<br />
+              Name: "Sci-Fi",<br />
+              Description: "Science fiction is a genre of speculative fiction
+              that typically deals with imaginative and futuristic concepts such
+              as advanced science and technology, space exploration, time
+              travel, parallel universes, and extraterrestrial life.",<br />
+              },<br />
+              Director: {<br />
+              Name: "John Krasinski",<br />
+              Bio: "John Burke Krasinski is an American actor and filmmaker. He
+              is the recipient of a number of accolades, including four
+              Primetime Emmy Award nominations and two Screen Actors Guild
+              Awards.",<br />
+              Birth: "1979",<br />
+              Death: ""<br />
+              },<br />
             </td>
           </tr>
 
           <tr>
             <td>Get information about a genre by name</td>
-            <td>/movies/[genre]</td>
+            <td>/genres/[Name]</td>
             <td>GET</td>
             <td>None</td>
             <td>
               A JSON object holding the data about the genre that was entered.
               Example:<br />
               {<br />
-              genre: Horror<br />
-              description: A horror film is one that seeks to elicit fear in its
-              audience for entertainment purposes. Horror films additionally aim
-              to evoke viewers' nightmares, fears, revulsions and terror of the
-              unknown and macabre.<br />
-              }
+              Name: "Sci-Fi",<br />
+              Description: "Science fiction is a genre of speculative fiction
+              that typically deals with imaginative and futuristic concepts such
+              as advanced science and technology, space exploration, time
+              travel, parallel universes, and extraterrestrial life."<br />
+              }<br />
             </td>
           </tr>
           <tr>
             <td>Get information about a director by name</td>
-            <td>/movies/[director]</td>
+            <td>/directors/[Name]</td>
             <td>GET</td>
             <td>None</td>
             <td>
               A JSON object holding the data about the director that was
               enetered. Example:<br />
               {<br />
-              name: Wes Anderson <br />
-              bio: Wesley Wales Anderson is an American film director,
-              screenwriter, and producer. His films are known for their
-              symmetry, eccentricity and distinctive visual and narrative
-              styles, and he is regarded by some critics as a modern-day example
-              of the auteur.<br />
-              birthYear: 1969<br />
-              deathYear: n/a<br />
-              }
+              Name: "Steven Spielberg",<br />
+              Bio: "Steven Allan Spielberg is an American film director,
+              producer, and screenwriter. He is considered one of the founding
+              pioneers of the New Hollywood era and one of the most popular
+              directors and producers in film history. Spielberg started in
+              Hollywood directing television and several minor theatrical
+              releases.",<br />
+              Birth: "1946",<br />
+              Death: ""<br />
+              }<br />
             </td>
           </tr>
           <tr>
@@ -118,64 +124,105 @@
               A JSON object holding account information for the user.
               Example:<br />
               {<br />
-              username: JohnSmith<br />
-              password: 123456<br />
-              email: JohnSmith@gmail.com<br />
-              }
+              Username: "oohgaryc",<br />
+              Email: "garysbestemail@gmail.com",<br />
+              Password: "pincollector007",<br />
+              Birthday: new Date("1980-11-18"),<br />
+              FavoriteMovies: []<br />
+              }<br />
             </td>
             <td>
               A JSON object holding the account information for the user, along
               with a User ID. Example:<br />
               {<br />
-              userID: 77<br />
-              username: JohnSmith<br />
-              password: 123456<br />
-              email: JohnSmith@gmail.com<br />
-              }
+              _id: "5fc2db92d1685fe25acf861f",<br />
+              Username: "oohgaryc",<br />
+              Email: "garysbestemail@gmail.com",<br />
+              Password: "pincollector007",<br />
+              Birthday: new Date("1980-11-18"),<br />
+              FavoriteMovies: []<br />
+              }<br />
             </td>
           </tr>
           <tr>
             <td>Allow users to update username</td>
-            <td>/users/[email]/[Username]</td>
+            <td>/users/[Username]</td>
             <td>PUT</td>
-            <td>None</td>
             <td>
-              A text message indicating that the username has been updated
+              A JSON object holding new account information for the user.
+              Example:<br />
+              {<br />
+              Username: "garyc",<br />
+              Email: "garysnewemail@yahoo.com",<br />
+              Password: "pincollector007",<br />
+              Birthday: new Date("1980-11-18")<br />
+              }<br />
+            </td>
+            <td>
+              A JSON object showing the new account information for the user,
+              along with ID. Example:<br />
+              {<br />
+              _id: "5fc2db92d1685fe25acf861f",<br />
+              Username: "garyc",<br />
+              Email: "garysnewemail@yahoo.com",<br />
+              Password: "pincollector007",<br />
+              Birthday: new Date("1980-11-18")<br />
+              FavoriteMovies: []<br />
+              }<br />
             </td>
           </tr>
           <tr>
-            <td>Allow users to update list of favorite movies</td>
-            <td>/users/[Username]/movies/[Title]</td>
-            <td>PUT</td>
+            <td>Allow users to add a movie to their list of favorite movies</td>
+            <td>/users/[Username]/movies/[MovieID]</td>
+            <td>POST</td>
+            <td>None</td>
             <td>
-              A JSON object holding data about the movie to add or remove,
-              structured like: <br />
+              A JSON object showing the user's updated information, with the new
+              movie added to their list of Favorite Movies. Example:<br />
               {<br />
-              title: Isle of Dogs<br />
-              description: When, by executive decree, all the canine pets of
-              Megasaki City are exiled to a vast garbage-dump called Trash
-              Island, 12-year-old Atari sets off alone in a miniature
-              Junior-Turbo Prop and flies across the river in search of his
-              bodyguard-dog, Spots. There, with the assistance of a pack of
-              newly-found mongrel friends, he begins an epic journey that will
-              decide the fate and future of the entire Prefecture.<br />
-              genre: {<br />
-              Animation,<br />
-              Comedy<br />
+              "FavoriteMovies": [<br />
+              "5fc2d9bdd1685fe25acf861b",<br />
+              "5fc2d9a9d1685fe25acf8619",<br />
+              "5fc2d979d1685fe25acf8615",<br />
+              "5fc2d981d1685fe25acf8616",<br />
+              "5fc2d9c5d1685fe25acf861c"<br />
+              ],<br />
+              "_id": "5fc2db92d1685fe25acf861f",<br />
+              "Username": "oohgaryc",<br />
+              "Email": "garysbestemail@gmail.com",<br />
+              "Password": "pincollector007",<br />
+              "Birthday": "1980-11-18T00:00:00.000Z"<br />
               }<br />
-              director: Wes Anderson<br />
-              image: ../img/dogs.jpg<br />
-              featured: true<br />
-              }
             </td>
+          </tr>
+          <tr>
             <td>
-              A text message indicating that the movie has been added to or
-              removed from the user's list of favorites.
+              Allow users to remove a movie from their list of favorite movies
+            </td>
+            <td>/users/[Username]/movies/[MovieID]</td>
+            <td>DELETE</td>
+            <td>None</td>
+            <td>
+              A JSON object showing the user's updated information, with the
+              movie removed from their list of Favorite Movies. Example:<br />
+              {<br />
+              "FavoriteMovies": [<br />
+              "5fc2d9a9d1685fe25acf8619",<br />
+              "5fc2d979d1685fe25acf8615",<br />
+              "5fc2d981d1685fe25acf8616",<br />
+              "5fc2d9c5d1685fe25acf861c"<br />
+              ],<br />
+              "_id": "5fc2db92d1685fe25acf861f",<br />
+              "Username": "oohgaryc",<br />
+              "Email": "garysbestemail@gmail.com",<br />
+              "Password": "pincollector007",<br />
+              "Birthday": "1980-11-18T00:00:00.000Z"<br />
+              }<br />
             </td>
           </tr>
           <tr>
             <td>Allow users to deregister</td>
-            <td>/users/[email]</td>
+            <td>/users/[Username]</td>
             <td>DELETE</td>
             <td>None</td>
             <td>
