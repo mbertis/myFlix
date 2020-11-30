@@ -60,22 +60,50 @@ app.use(morgan("common"));
 
 // Gets the list of data about all movies
 app.get("/movies", (req, res) => {
-  res.json(topMovies);
+  Users.find()
+  .then((movies) => {
+    res.status(201).json(movies);
+  })
+  .catch((err) => {
+    console.error(err);
+    res.status(500).send("Error: " + err);
+  });
 });
 
 // Gets the data about a single movie, by title
 app.get("/movies/:title", (req, res) => {
-  res.send("Successful GET request returning data on " + req.params.title);
+  Movies.findOne({Title: req.params.Title})
+  .then((movie) => {
+    res.json(movie);
+  })
+  .catch((err) => {
+    console.error(err);
+    res.status(500).send("Error: " + err);
+  });
 });
 
 //Gets information about a genre by name
 app.get("/movies/:genre", (req, res) => {
-  res.send("Successful GET request returning data on " + req.params.genre);
+  Movies.find()
+  .ten((movies) => {
+    res.status(201).json(movies);
+  })
+  .catch((err) => {
+    console.error(err);
+    res.status(500).send("Error: " + err);
+  });
 });
 
 //Gets information about a director by name
 app.get("/movies/:director", (req, res) => {
-  res.send("Successful GET request returning data on " + req.params.director);
+  Movies.findOne({Director: req.params.Director})
+  .then((director) => {
+    res.json(director);
+  })
+  .catch((err) => {
+    console.error(err);
+    res.json(500).send("Error: " + err);
+  });
 });
 
 //Allows new users to register
