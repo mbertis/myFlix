@@ -18,6 +18,8 @@ mongoose.connect("mongodb://localhost:27017/myFlixDB", {
 
 app.use(bodyParser.json());
 
+let auth = require("./auth")(app); //Passes auth.js into this file, also allows Express to be available in auth.js
+
 let topMovies = [
   {
     title: "The Grand Budapest Hotel",
