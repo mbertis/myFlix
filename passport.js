@@ -28,3 +28,17 @@ passport.use(new LocalStrategy({
         return callback(null, user);
     });
 }));
+
+//Allows for authentication of users based on the JWT submitted alongside their request
+passport.use(new JWTStrategy({
+    jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
+    secretOrKey: "your_jwt_secret"
+}, (jwtPayload, callback) => {
+    return Users.findById(jwtPayload._id)
+    .then((user) => {
+        return callback(null, user);
+    })
+    .catch((error) => {
+        return callback(error)
+    });
+}));
