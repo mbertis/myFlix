@@ -3,7 +3,10 @@ const express = require("express"),
   bodyParser = require("body-parser"),
   uuid = require("uuid"),
   mongoose = require("mongoose"),
-  Models = require("./models.js");
+  Models = require("./models.js"),
+  passport = require("passport");
+
+require("./passport");
 
 const app = express(),
   Movies = Models.Movie,
