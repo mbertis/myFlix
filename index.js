@@ -157,7 +157,7 @@ app.get(
   Birthday: Date
 }*/
 app.post("/users", (req, res) => {
-  let hashedPassword = Users.hashPassword(req.body.Password);
+  let hashedPassword = Users.hashPassword(req.body.Password); //This hashes any password entered by the user when registering before storing it in DB
   Users.findOne({ Username: req.body.Username })
     .then((user) => {
       if (user) {
