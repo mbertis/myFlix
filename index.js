@@ -172,7 +172,7 @@ app.post("/users",
   if(!errors.isEmpty()) {
     return res.status(422).json({errors: errors.array()});
   }
-  
+
   let hashedPassword = Users.hashPassword(req.body.Password); //This hashes any password entered by the user when registering before storing it in DB
   Users.findOne({ Username: req.body.Username })
     .then((user) => {
@@ -243,7 +243,18 @@ app.get(
 app.put(
   "/users/:Username",
   passport.authenticate("jwt", { session: false }),
+  [
+    check("Username", "Username must contain five or more characters").isLength({min: 5}),
+    check("Username", "Username contains non alphanumeric characters - not allowed.").isAlphanumeric(),
+    check("Password", "Password must contain eight or more characters").isLength({min: 8}),
+    check("Email", "Email does not appear to be valid").isEmail()
+  ],
   (req, res) => {
+    let errors = validationResult(req);
+
+  if(!errors.isEmpty()) {
+    return res.status(422).json({errors: errors.array()});
+  }
     Users.findOneAndUpdate(
       { Username: req.params.Username },
       {
