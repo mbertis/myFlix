@@ -166,6 +166,13 @@ app.post("/users",
   check("Email", "Email does not appear to be valid").isEmail()
 ],
 (req, res) => {
+  //checks validation object for errors and prevents the rest of the code from executing if errors were found
+  let errors = validationResult(req);
+
+  if(!errors.isEmpty()) {
+    return res.status(422).json({errors: errors.array()});
+  }
+  
   let hashedPassword = Users.hashPassword(req.body.Password); //This hashes any password entered by the user when registering before storing it in DB
   Users.findOne({ Username: req.body.Username })
     .then((user) => {
