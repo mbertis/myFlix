@@ -26,10 +26,12 @@ app.use(bodyParser.json());
 
 let auth = require("./auth")(app); //Passes auth.js into this file, also allows Express to be available in auth.js
 
-//Creates list with allowed domains
+/*Creates list with allowed domains - task says to allow all domains, though this is often considered bad practice
 let allowedOrigins = ["http://localhost:8080", "http://testsite.com"];
+*/
 
-app.use(cors({
+app.use(cors()); //By default, this will allow all domains to make requests to the API. The commented code below restricts this to specific origins.
+  /*{
   origin: (origin, callback) => {
     if(!origin) return callback(null, true);
     if(allowedOrigins.indexOf(origin) === -1){ // If a specific origin isn't found on the list of allowed origins
@@ -39,6 +41,7 @@ app.use(cors({
     return callback(null, true);
   }
 }));
+*/
 
 let topMovies = [
   {
