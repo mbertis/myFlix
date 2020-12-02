@@ -158,7 +158,14 @@ app.get(
   Email: String,
   Birthday: Date
 }*/
-app.post("/users", (req, res) => {
+app.post("/users", 
+[
+  check("Username", "Username must contain five or more characters").isLength({min: 5}),
+  check("Username", "Username contains non alphanumeric characters - not allowed.").isAlphanumeric(),
+  check("Password", "Password must contain eight or more characters").isLength({min: 8}),
+  check("Email", "Email does not appear to be valid").isEmail()
+],
+(req, res) => {
   let hashedPassword = Users.hashPassword(req.body.Password); //This hashes any password entered by the user when registering before storing it in DB
   Users.findOne({ Username: req.body.Username })
     .then((user) => {
