@@ -24,6 +24,7 @@ app.use(bodyParser.json());
 
 let auth = require("./auth")(app); //Passes auth.js into this file, also allows Express to be available in auth.js
 
+//Creates list with allowed domains
 let allowedOrigins = ["http://localhost:8080", "http://testsite.com"];
 
 app.use(cors({
