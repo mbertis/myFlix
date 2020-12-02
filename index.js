@@ -9,6 +9,8 @@ const express = require("express"),
 
 require("./passport");
 
+const { check, validationResult } = require("express-validator");
+
 const app = express(),
   Movies = Models.Movie,
   Users = Models.User,
