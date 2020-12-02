@@ -29,6 +29,11 @@ passport.use(
           }); //Error message is passed to the callback if username cannot be found within DB
         }
 
+        if (!user.validatePassword(password)) {
+          console.log("incorrect password");
+          return callback(null, false, {message: "Incorrect password"});
+        }
+
         console.log("finished");
         return callback(null, user);
       });
