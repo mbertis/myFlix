@@ -368,3 +368,13 @@ var director9 = {
 }
 
 db.directors.insertOne(director9)
+
+**Code for importing collections into Atlas -- had to put password in '' because of ! (this is an issue in Ubuntu unless specified with '')
+
+mongoimport --uri mongodb+srv://myFlixDB-admin:'2mbMongo5!'@madison-cluster1.2mpya.mongodb.net/myFlixDB --collection movies --type json --file ../exported_collections/movies.json
+
+mongoimport --uri mongodb+srv://myFlixDB-admin:'2mbMongo5!'@madison-cluster1.2mpya.mongodb.net/myFlixDB --collection users --type json --file ../exported_collections/users.json
+
+mongoimport --uri mongodb+srv://myFlixDB-admin:'2mbMongo5!'@madison-cluster1.2mpya.mongodb.net/myFlixDB --collection genres --type json --file ../exported_collections/genres.json
+
+mongoimport --uri mongodb+srv://myFlixDB-admin:'2mbMongo5!'@madison-cluster1.2mpya.mongodb.net/myFlixDB --collection directors --type json --file ../exported_collections/directors.json
