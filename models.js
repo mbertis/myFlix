@@ -24,13 +24,15 @@ let userSchema = mongoose.Schema({
   FavoriteMovies: [{ type: mongoose.Schema.Types.ObjectId, ref: "Movie" }],
 });
 
-userSchema.statics.hashPassword = (password) => { //Actually does the hashing of submitted passwords
+userSchema.statics.hashPassword = (password) => {
+  //Actually does the hashing of submitted passwords
   return bcrypt.hashSync(password, 10);
-}
+};
 
-userSchema.methods.validatePassword = function(password) { //Compares submitted hashed passwords with the hashed passwords stored in DB
+userSchema.methods.validatePassword = function (password) {
+  //Compares submitted hashed passwords with the hashed passwords stored in DB
   return bcrypt.compareSync(password, this.Password);
-}
+};
 
 let directorSchema = mongoose.Schema({
   Name: { type: String, required: true },

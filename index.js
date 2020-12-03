@@ -31,7 +31,7 @@ let allowedOrigins = ["http://localhost:8080", "http://testsite.com"];
 */
 
 app.use(cors()); //By default, this will allow all domains to make requests to the API. The commented code below restricts this to specific origins.
-  /*{
+/*{
   origin: (origin, callback) => {
     if(!origin) return callback(null, true);
     if(allowedOrigins.indexOf(origin) === -1){ // If a specific origin isn't found on the list of allowed origins
@@ -161,47 +161,58 @@ app.get(
   Email: String,
   Birthday: Date
 }*/
-app.post("/users", 
-[
-  check("Username", "Username must contain five or more characters").isLength({min: 5}),
-  check("Username", "Username contains non alphanumeric characters - not allowed.").isAlphanumeric(),
-  check("Password", "Password must contain eight or more characters").isLength({min: 8}),
-  check("Email", "Email does not appear to be valid").isEmail()
-],
-(req, res) => {
-  //checks validation object for errors and prevents the rest of the code from executing if errors were found
-  let errors = validationResult(req);
+app.post(
+  "/users",
+  [
+    check(
+      "Username",
+      "Username must contain five or more characters"
+    ).isLength({ min: 5 }),
+    check(
+      "Username",
+      "Username contains non alphanumeric characters - not allowed."
+    ).isAlphanumeric(),
+    check(
+      "Password",
+      "Password must contain eight or more characters"
+    ).isLength({ min: 8 }),
+    check("Email", "Email does not appear to be valid").isEmail(),
+  ],
+  (req, res) => {
+    //checks validation object for errors and prevents the rest of the code from executing if errors were found
+    let errors = validationResult(req);
 
-  if(!errors.isEmpty()) {
-    return res.status(422).json({errors: errors.array()});
-  }
+    if (!errors.isEmpty()) {
+      return res.status(422).json({ errors: errors.array() });
+    }
 
-  let hashedPassword = Users.hashPassword(req.body.Password); //This hashes any password entered by the user when registering before storing it in DB
-  Users.findOne({ Username: req.body.Username })
-    .then((user) => {
-      if (user) {
-        return res.status(400).send(req.body.Username + " already exists");
-      } else {
-        Users.create({
-          Username: req.body.Username,
-          Password: hashedPassword,
-          Email: req.body.Email,
-          Birthday: req.body.Birthday,
-        })
-          .then((user) => {
-            res.status(201).json(user);
+    let hashedPassword = Users.hashPassword(req.body.Password); //This hashes any password entered by the user when registering before storing it in DB
+    Users.findOne({ Username: req.body.Username })
+      .then((user) => {
+        if (user) {
+          return res.status(400).send(req.body.Username + " already exists");
+        } else {
+          Users.create({
+            Username: req.body.Username,
+            Password: hashedPassword,
+            Email: req.body.Email,
+            Birthday: req.body.Birthday,
           })
-          .catch((error) => {
-            console.error(error);
-            res.status(500).send("Error: " + error);
-          });
-      }
-    })
-    .catch((error) => {
-      console.error(error);
-      res.status(500).send("Error: " + error);
-    });
-});
+            .then((user) => {
+              res.status(201).json(user);
+            })
+            .catch((error) => {
+              console.error(error);
+              res.status(500).send("Error: " + error);
+            });
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+        res.status(500).send("Error: " + error);
+      });
+  }
+);
 
 //Get information about ALL users
 app.get(
@@ -247,18 +258,27 @@ app.put(
   "/users/:Username",
   passport.authenticate("jwt", { session: false }),
   [
-    check("Username", "Username must contain five or more characters").isLength({min: 5}),
-    check("Username", "Username contains non alphanumeric characters - not allowed.").isAlphanumeric(),
-    check("Password", "Password must contain eight or more characters").isLength({min: 8}),
-    check("Email", "Email does not appear to be valid").isEmail()
+    check(
+      "Username",
+      "Username must contain five or more characters"
+    ).isLength({ min: 5 }),
+    check(
+      "Username",
+      "Username contains non alphanumeric characters - not allowed."
+    ).isAlphanumeric(),
+    check(
+      "Password",
+      "Password must contain eight or more characters"
+    ).isLength({ min: 8 }),
+    check("Email", "Email does not appear to be valid").isEmail(),
   ],
   (req, res) => {
     let errors = validationResult(req);
 
-  if(!errors.isEmpty()) {
-    return res.status(422).json({errors: errors.array()});
-  }
-  let hashedPassword = Users.hashPassword(req.body.Password); //This hashes any password entered by the user when registering before storing it in DB
+    if (!errors.isEmpty()) {
+      return res.status(422).json({ errors: errors.array() });
+    }
+    let hashedPassword = Users.hashPassword(req.body.Password); //This hashes any password entered by the user when registering before storing it in DB
     Users.findOneAndUpdate(
       { Username: req.params.Username },
       {
