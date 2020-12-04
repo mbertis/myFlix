@@ -23,6 +23,11 @@ const app = express(),
 });
 */
 
+// mongoose.connect("mongodb+srv://myFlixDB-admin:Ozymandiusisagoodkitty25@madison-cluster1.2mpya.mongodb.net/myFlixDB?retryWrites=true&w=majority", {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
+// });
+
 mongoose.connect(process.env.CONNECTION_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -97,7 +102,7 @@ app.use(morgan("common"));
 // Gets the list of data about all movies
 app.get(
   "/movies",
-  passport.authenticate("jwt", { session: false }),
+  // passport.authenticate("jwt", { session: false }),
   (req, res) => {
     Movies.find()
       .then((movies) => {
@@ -127,36 +132,60 @@ app.get(
 );
 
 //Gets information about a genre by name
-app.get(
-  "/genres/:Name",
-  passport.authenticate("jwt", { session: false }),
-  (req, res) => {
-    Genres.findOne({ Name: req.params.Name })
-      .then((genre) => {
-        res.status(201).json(genre);
-      })
-      .catch((err) => {
-        console.error(err);
-        res.status(500).send("Error: " + err);
-      });
-  }
-);
+// app.get(
+//   "/genres/:Name",
+//   passport.authenticate("jwt", { session: false }),
+//   (req, res) => {
+//     Genres.findOne({ Name: req.params.Name })
+//       .then((genre) => {
+//         res.status(201).json(genre);
+//       })
+//       .catch((err) => {
+//         console.error(err);
+//         res.status(500).send("Error: " + err);
+//       });
+//   }
+// );
 
 //Gets information about a director by name
-app.get(
-  "/directors/:Name",
-  passport.authenticate("jwt", { session: false }),
-  (req, res) => {
-    Directors.findOne({ Name: req.params.Name })
-      .then((director) => {
-        res.json(director);
-      })
-      .catch((err) => {
-        console.error(err);
-        res.json(500).send("Error: " + err);
-      });
-  }
-);
+// app.get(
+//   "/directors/:Name",
+//   passport.authenticate("jwt", { session: false }),
+//   (req, res) => {
+//     Directors.findOne({ Name: req.params.Name })
+//       .then((director) => {
+//         res.json(director);
+//       })
+//       .catch((err) => {
+//         console.error(err);
+//         res.json(500).send("Error: " + err);
+//       });
+//   }
+// );
+
+//get data about director
+app.get("/movies/director/:Name", function (req, res) {
+  Movies.findOne({ "Director.Name": req.params.Name })
+    .then(function (movies) {
+      res.json(movies.Director);
+    })
+    .catch(function (err) {
+      console.error(err);
+      res.status(500).send("Error: " + err);
+    });
+});
+
+//get data about genre by name
+app.get("/movies/genre/:Name", function (req, res) {
+  Movies.findOne({ "Genre.Name": req.params.Name })
+    .then(function (movies) {
+      res.json(movies.Genre);
+    })
+    .catch(function (err) {
+      console.error(err);
+      res.status(500).send("Error: " + err);
+    });
+});
 
 //Allows new users to register
 /* We expect JSON in this format
