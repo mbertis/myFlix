@@ -97,6 +97,7 @@ app.use(morgan("common"));
 // Gets the list of data about all movies
 app.get(
   "/movies",
+  passport.authenticate("jwt", { session: false }),
   (req, res) => {
     Movies.find()
       .then((movies) => {
