@@ -36,7 +36,7 @@ let auth = require("./auth")(app); //Passes auth.js into this file, also allows 
 let allowedOrigins = ["http://localhost:8080", "http://testsite.com"];
 */
 
-app.use(cors()); //By default, this will allow all domains to make requests to the API. The commented code below restricts this to specific origins.
+// app.use(cors()); //By default, this will allow all domains to make requests to the API. The commented code below restricts this to specific origins.
 /*{
   origin: (origin, callback) => {
     if(!origin) return callback(null, true);
