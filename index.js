@@ -1,28 +1,28 @@
-const path = require("path");
-const express = require("express"),
-  morgan = require("morgan"),
-  bodyParser = require("body-parser"),
-  uuid = require("uuid"),
-  mongoose = require("mongoose"),
-  Models = require("./models.js"),
-  passport = require("passport"),
-  cors = require("cors");
+// const path = require("path");
+// const express = require("express"),
+//   morgan = require("morgan"),
+//   bodyParser = require("body-parser"),
+//   uuid = require("uuid"),
+//   mongoose = require("mongoose"),
+//   Models = require("./models.js"),
+//   passport = require("passport"),
+//   cors = require("cors");
 
-require("./passport");
+// require("./passport");
 
-const { check, validationResult } = require("express-validator");
+// const { check, validationResult } = require("express-validator");
 
-const app = express(),
-  Movies = Models.Movie,
-  Users = Models.User,
-  Directors = Models.Director,
-  Genres = Models.Genre;
+// const app = express(),
+//   Movies = Models.Movie,
+//   Users = Models.User,
+//   Directors = Models.Director,
+//   Genres = Models.Genre;
 
-app.use(express.static("public"));
-app.use("/client", express.static(path.join(__dirname, "client", "dist")));
-app.get("/client/*", (req, res) => {
-  res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
-});
+// app.use(express.static("public"));
+// app.use("/client", express.static(path.join(__dirname, "client", "dist")));
+// app.get("/client/*", (req, res) => {
+//   res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
+// });
 
 /*mongoose.connect("mongodb://localhost:27017/myFlixDB", {
   useNewUrlParser: true,
@@ -30,12 +30,39 @@ app.get("/client/*", (req, res) => {
 });
 */
 
+const path = require("path");
+const express = require("express"),
+  morgan = require("morgan"),
+  bodyParser = require("body-parser"),
+  uuid = require("uuid");
+mongoose = require("mongoose");
+Models = require("./models.js");
+cors = require("cors");
+const app = express();
+const Movies = Models.Movie;
+const Users = Models.User;
+const { check, validationResult } = require("express-validator");
+// local connection
+//mongoose.connect("mongodb://localhost:27017/myflixdb", {useNewUrlParser: true});
 mongoose.connect(process.env.CONNECTION_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
 
+app.use(morgan("common"));
+app.use(express.static("public"));
+app.use("/client", express.static(path.join(__dirname, "client", "dist")));
 app.use(bodyParser.json());
+app.use(cors());
+
+app.get("/client/*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
+});
+
+
+
+
+// app.use(bodyParser.json());
 
 let auth = require("./auth")(app); //Passes auth.js into this file, also allows Express to be available in auth.js
 
