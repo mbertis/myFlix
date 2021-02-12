@@ -11,16 +11,18 @@ const express = require("express"),
 require("./passport");
 
 const { check, validationResult } = require("express-validator");
-app.use(express.static("public"));
-app.use("/client", express.static(path.join(__dirname, "client", "dist")));
-app.get("/client/*", (req, res) => {
-  res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
-});
+
 const app = express(),
   Movies = Models.Movie,
   Users = Models.User,
   Directors = Models.Director,
   Genres = Models.Genre;
+
+app.use(express.static("public"));
+app.use("/client", express.static(path.join(__dirname, "client", "dist")));
+app.get("/client/*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
+});
 
 /*mongoose.connect("mongodb://localhost:27017/myFlixDB", {
   useNewUrlParser: true,
