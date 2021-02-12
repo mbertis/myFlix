@@ -66,6 +66,9 @@ app.get("/client/*", (req, res) => {
 
 let auth = require("./auth")(app); //Passes auth.js into this file, also allows Express to be available in auth.js
 
+const passport = require("passport");
+require("./passport");
+
 // Creates list with allowed domains - task says to allow all domains, though this is often considered bad practice
 let allowedOrigins = ["http://localhost:8080", "http://localhost:1234", "https://madison-myflix.herokuapp.com", "https://myfavflix.netlify.app"];
 
