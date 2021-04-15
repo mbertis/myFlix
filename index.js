@@ -37,7 +37,7 @@ const express = require("express"),
   uuid = require("uuid");
 mongoose = require("mongoose");
 Models = require("./models.js");
-cors = require("cors");
+// cors = require("cors");
 const app = express();
 const Movies = Models.Movie;
 const Users = Models.User;
@@ -53,7 +53,7 @@ app.use(morgan("common"));
 app.use(express.static("public"));
 app.use("/client", express.static(path.join(__dirname, "client", "dist")));
 app.use(bodyParser.json());
-app.use(cors());
+// app.use(cors());
 
 app.get("/client/*", (req, res) => {
   res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
@@ -70,20 +70,20 @@ const passport = require("passport");
 require("./passport");
 
 // Creates list with allowed domains - task says to allow all domains, though this is often considered bad practice
-let allowedOrigins = ["http://localhost:8080", "http://localhost:1234", "http://localhost:4200/", "https://madison-myflix.herokuapp.com", "https://myfavflix.netlify.app"];
+// let allowedOrigins = ["http://localhost:8080", "http://localhost:1234", "http://localhost:4200/", "https://madison-myflix.herokuapp.com", "https://myfavflix.netlify.app"];
 
 
-// app.use(cors()); //By default, this will allow all domains to make requests to the API. The commented code below restricts this to specific origins.
-app.use(cors({
-  origin: (origin, callback) => {
-    if(!origin) return callback(null, true);
-    if(allowedOrigins.indexOf(origin) === -1){ // If a specific origin isn’t found on the list of allowed origins
-      let message = 'The CORS policy for this application doesn’t allow access from origin ' + origin;
-      return callback(new Error(message ), false);
-    }
-    return callback(null, true);
-  }
-}))
+// // app.use(cors()); //By default, this will allow all domains to make requests to the API. The commented code below restricts this to specific origins.
+// app.use(cors({
+//   origin: (origin, callback) => {
+//     if(!origin) return callback(null, true);
+//     if(allowedOrigins.indexOf(origin) === -1){ // If a specific origin isn’t found on the list of allowed origins
+//       let message = 'The CORS policy for this application doesn’t allow access from origin ' + origin;
+//       return callback(new Error(message ), false);
+//     }
+//     return callback(null, true);
+//   }
+// }))
 
 app.use(morgan("common"));
 
