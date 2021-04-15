@@ -668,7 +668,7 @@ passport.authenticate('jwt', { session: false }),
 /**
  * This allows a user to add a movie to their favorites
  */
-app.post('/users/:Username/favorites/:MovieID', passport.authenticate('jwt', 
+app.post('/users/:Username/Movies/:MovieID', passport.authenticate('jwt', 
   { session: false }), (req, res) => {
     Users.findOneAndUpdate({ Username: req.params.Username }, { // Finds a user by username
         $push: { FavoriteMovies: req.params.MovieID } // Adds a movie by ID to user's favorites
@@ -687,7 +687,7 @@ app.post('/users/:Username/favorites/:MovieID', passport.authenticate('jwt',
 /**
  * This allows a user to remove a movie from their favorites
  */
-app.delete('/users/:Username/favorites/:MovieID', passport.authenticate('jwt', 
+app.delete('/users/:Username/Movies/:MovieID', passport.authenticate('jwt', 
   { session: false }), (req, res) => {
     Users.findOneAndUpdate({ Username: req.params.Username }, { // Finds a user by username
         $pull: { FavoriteMovies: req.params.MovieID } // Removes a movie by ID from user's favorites
