@@ -70,7 +70,7 @@ const passport = require("passport");
 require("./passport");
 
 // Creates list with allowed domains - task says to allow all domains, though this is often considered bad practice
-let allowedOrigins = ["http://localhost:8080", "http://localhost:1234", "https://madison-myflix.herokuapp.com", "https://myfavflix.netlify.app"];
+let allowedOrigins = ["http://localhost:8080", "http://localhost:1234", "http://localhost:4200/", "https://madison-myflix.herokuapp.com", "https://myfavflix.netlify.app"];
 
 
 // app.use(cors()); //By default, this will allow all domains to make requests to the API. The commented code below restricts this to specific origins.
