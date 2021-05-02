@@ -19,8 +19,6 @@ const Users = Models.User;
  * Connects MongoDB database
  */
 mongoose.connect( process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
-// The line below uses local database created on my machine
-// mongoose.connect('mongodb://localhost:27017/flixNETDB', { useNewUrlParser: true, useUnifiedTopology: true }); 
 
 /**
  * Allows the use of express
@@ -40,12 +38,12 @@ let auth = require('./auth')(app);
 app.use(morgan('common'));
 
 /**
- * This serves the "documentation.html" file to the browser
+ * Serves the "documentation.html" file to the browser
  */
 app.use(express.static('public'));
 
 /**
- * This is the error handling function
+ * Error handling function
  */
 app.use((err, req, res, next) => {
     console.error(err.stack);
@@ -57,16 +55,16 @@ app.use((err, req, res, next) => {
  */
 
  /**
-  * This shows the default message
+  * Shows default welcome message
   * @param req
   * @param res
   */
 app.get('/', (req, res) => {
-    res.send('Welcome to flixNET!');
+    res.send('Welcome to myFlix!');
 });
 
 /**
- * This gets the list of data for all movie objects
+ * Gets data for all movies
  */
 app.get('/movies', passport.authenticate('jwt', { session: false }), (req, res) => {
     Movies.find()
@@ -80,7 +78,7 @@ app.get('/movies', passport.authenticate('jwt', { session: false }), (req, res) 
 });
 
 /**
- * This gets data about a single movie, by title
+ * Gets data about a single movie by title
  */
 app.get('/movies/:Title', passport.authenticate('jwt', { session: false }), (req,res) => {
     Movies.findOne({ Title: req.params.Title }) // This finds a movie by its title
@@ -94,7 +92,7 @@ app.get('/movies/:Title', passport.authenticate('jwt', { session: false }), (req
 });
 
 /**
- * This gets data about a specific genre by its name
+ * Gets data about a single genre by name
  */
 app.get('/movies/genres/:Name', passport.authenticate('jwt', { session: false }), (req, res) => {
     Movies.findOne({ "Genre.Name": req.params.Name }) // This finds a genre by its name
@@ -108,7 +106,7 @@ app.get('/movies/genres/:Name', passport.authenticate('jwt', { session: false })
 });
 
 /**
- * This gets data about a specific director by name
+ * Gets data about a single director by name
  */
 app.get('/movies/directors/:Name',passport.authenticate('jwt', { session: false }), (req, res) => {
     Movies.findOne({ "Director.Name": req.params.Name })  // This finds a directer by their name
@@ -147,8 +145,8 @@ app.post('/users',
           return res.status(422).json({ errors: errors.array() });
       }
 
-    let hashedPassword = Users.hashPassword(req.body.Password); // hashes the password stored in the database
-    Users.findOne({ Username: req.body.Username })  // queries the "Users" model using mongoose
+    let hashedPassword = Users.hashPassword(req.body.Password); // hashes the password stored in the database so password itself is never stored
+    Users.findOne({ Username: req.body.Username })
         .then((user) => {
           if (user) {
             return res.status(400).send(req.body.Username + 'already exists');
@@ -188,7 +186,7 @@ app.post('/users',
 // });
 
 /**
- * This returns data for a specific user by their username
+ * Returns data for a specific user by their username
  */
 app.get('/users/:Username', passport.authenticate('jwt', { session: false }), 
   (req, res) => {
@@ -203,7 +201,7 @@ app.get('/users/:Username', passport.authenticate('jwt', { session: false }),
 });
 
 /**
- * This allows a user to update their information
+ * Allows a user to update their information
  * For endpoint testing we'll expect JSON in this format
  * {
     Username: String,
@@ -232,7 +230,7 @@ passport.authenticate('jwt', { session: false }),
           return res.status(422).json({ errors: errors.array() });
       }
 
-    let hashedPassword = Users.hashPassword(req.body.Password); // hashes the password stored in the database
+    let hashedPassword = Users.hashPassword(req.body.Password); // hashes the password stored in the database so that the password itself is never stored
     
     Users.findOneAndUpdate({ Username: req.params.Username }, // finds a user by username and updates their info
     { $set:
@@ -255,7 +253,8 @@ passport.authenticate('jwt', { session: false }),
 });
 
 /**
- * This allows a user to add a movie to their favorites
+ * Allows user to add a movie to their list of favorites
+ * Adds the movie to favorites list by movie ID
  */
 app.post('/users/:Username/Movies/:MovieID', passport.authenticate('jwt', 
   { session: false }), (req, res) => {
@@ -274,7 +273,7 @@ app.post('/users/:Username/Movies/:MovieID', passport.authenticate('jwt',
 });
 
 /**
- * This allows a user to remove a movie from their favorites
+ * Allows user to remove a movie from their list of favorites
  */
 app.delete('/users/:Username/Movies/:MovieID', passport.authenticate('jwt', 
   { session: false }), (req, res) => {
@@ -293,7 +292,7 @@ app.delete('/users/:Username/Movies/:MovieID', passport.authenticate('jwt',
 });
 
 /**
- * This allows a user to delete their profile and removes them from the database
+ * Allows user to delete their account and removes them from the database
  */
 app.delete('/users/:Username', passport.authenticate('jwt', { session: false }), 
   (req, res) => {
@@ -312,7 +311,7 @@ app.delete('/users/:Username', passport.authenticate('jwt', { session: false }),
 });
 
 /**
- * This listens for requests and looks for a pre-configured port number in the environment variable.
+ * Listens for requests and looks for a pre-configured port number in the environment variable.
  * If nothing is found it sets the port to 8080
  */
 const port = process.env.PORT || 8080;
