@@ -27,4 +27,4 @@ single movie by title to the user
 - API is deployed to Heroku
 
 # Documentation
-Addtional documentation can be found [here] (http://madison-myflix.herokuapp.com/documentation.html).
+Addtional documentation can be found [here](http://madison-myflix.herokuapp.com/documentation.html).
