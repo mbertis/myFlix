@@ -40,7 +40,7 @@ app.use(morgan('common'));
 /**
  * Serves the "documentation.html" file to the browser
  */
-app.use(express.static('public'));
+app.use(express.static('Public'));
 
 /**
  * Error handling function
